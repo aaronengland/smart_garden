@@ -45,7 +45,7 @@ while True:
             int_moisture_level = GPIO.input(int_channel_input)
             # print level
             print('Sensor is dry, valve is on.')
-            print('Checking moisture level again in {0} second(s)'.format(int_sec_sleep_dry))
+            print('Checking moisture level again in {0} second(s).'.format(int_sec_sleep_dry))
             # sleep
             time.sleep(int_sec_sleep_dry)
         # turn off valve
