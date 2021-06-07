@@ -26,13 +26,12 @@ GPIO.setup(int_channel_input, GPIO.IN)
 # configure a channel as an output
 GPIO.setup(int_channel_output, GPIO.OUT)
 
-# get initial value (1 == dry)
-int_moisture_level = GPIO.input(int_channel_input)
-# print
-print('Initial Moisture Level: {0}'.format(int_moisture_level))
-
 # begin while loop
 while True:
+    # get initial value (1 == dry)
+    int_moisture_level = GPIO.input(int_channel_input)
+    # print
+    print('Initial Moisture Level: {0}'.format(int_moisture_level))
     # logic to check if mositure level is dry
     if int_moisture_level == 1: # dry
         # print
@@ -50,8 +49,6 @@ while True:
             time.sleep(int_sec_sleep_dry)
         # turn off valve
         GPIO.output(int_channel_output, 0)
-        # reset int_moisture_level to 1
-        int_moisture_level = 1
         # print message
         print('Sensor is wet, valve is off.')
         print('Checking moisture level again in {0} second(s).'.format(int_sec_sleep_wet))
