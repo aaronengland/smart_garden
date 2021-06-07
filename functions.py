@@ -36,7 +36,7 @@ class Interval_Watering:
 			# get initial value (1 == dry)
 			int_moisture_level = GPIO.input(int_channel_input)
 			# log it
-			self.dict_log[datetime.datetime.now()] = int_moisture_level
+			self.dict_log[str(datetime.datetime.now())] = int_moisture_level
 			# write log
 			with open(str_filename,'w') as data: 
  				data.write(str(self.dict_log))
@@ -53,7 +53,7 @@ class Interval_Watering:
 					# get measurement
 					int_moisture_level = GPIO.input(int_channel_input)
 					# log it
-					self.dict_log[datetime.datetime.now()] = int_moisture_level
+					self.dict_log[str(datetime.datetime.now())] = int_moisture_level
 					# write log
 					with open(str_filename,'w') as data: 
  						data.write(str(self.dict_log))
