@@ -11,7 +11,7 @@ int_channel_output = 15
 # seconds to wait if soil dry
 int_sec_sleep_dry = 1
 # seconds to wait of soil is wet
-int_sec_sleep_wet = 30
+int_sec_sleep_wet = 10
 
 
 
@@ -42,19 +42,21 @@ while True:
         # while sensor is dry
         while int_moisture_level == 1:
             # get measurement
-            int_moisture_level = GPIO.input(int_channel_input)
-            # logic
-            if int_moisture_level == 1:
-                # print level
-                print('Sensor is dry, checking again in {0} second(s)'.format(int_sec_sleep_dry))
+            #int_moisture_level = GPIO.input(int_channel_input)
+            # print level
+            print('Sensor is dry, checking again in {0} second(s)'.format(int_sec_sleep_dry))
             # sleep
             time.sleep(int_sec_sleep_dry)
         # turn off valve
         GPIO.output(int_channel_output, 0)
+        # reset int_moisture_level to 1
+        int_moisture_level = 1
         # print message
         print('Sensor is wet, valve is off.')
-        print('Checking moisture level again in {0} seconds.'.format(int_sec_sleep_wet))
+        print('Checking moisture level again in {0} second(s).'.format(int_sec_sleep_wet))
         # sleep
         time.sleep(int_sec_sleep_wet)
     else:
+        print('Sensor is wet, valve is off.')
+        print('Checking moisture level again in {0} second(s).'.format(int_sec_sleep_wet))
         time.sleep(int_sec_sleep_wet)
