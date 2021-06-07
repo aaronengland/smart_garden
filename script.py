@@ -25,26 +25,32 @@ int_moisture_level = GPIO.input(int_channel_input)
 # print
 print('Initial Moisture Level: {0}'.format(int_moisture_level))
 
-# logic
-if int_moisture_level == 1: # dry
-    # print
-    print('Soil is dry, turning valve on...')
-    # turn on valve
-    GPIO.output(int_channel_output, 1) # set to 1 for ON
-    # while sensor is dry
-    while int_moisture_level == 1:
-        # get measurement
-        int_moisture_level = GPIO.input(int_channel_input)
-        # logic
-        if int_moisture_level == 1:
-            str_moisture_level = 'Dry'
-        elif int_moisture_level == 0:
-            str_moisture_level = 'Wet'
-        # print level
-        print('Moisture Level: {0}'.format(str_moisture_level))
+# begin while loop
+while True:
+    # logic to check if mositure level is dry
+    if int_moisture_level == 1: # dry
+        # print
+        print('Soil is dry, turning valve on...')
+        # turn on valve
+        GPIO.output(int_channel_output, 1) # set to 1 for ON
+        # while sensor is dry
+        while int_moisture_level == 1:
+            # get measurement
+            int_moisture_level = GPIO.input(int_channel_input)
+            # logic
+            if int_moisture_level == 1:
+                str_moisture_level = 'Dry'
+            elif int_moisture_level == 0:
+                str_moisture_level = 'Wet'
+            # print level
+            print('Moisture Level: {0}'.format(str_moisture_level))
+            # sleep
+            time.sleep(1)
+        # turn off valve
+        GPIO.output(int_channel_output, 0)
+        # print message
+        print('Soil is wet, valve is off.')
         # sleep
-        time.sleep(2)
-    # turn off valve
-    GPIO.output(int_channel_output, 0)
-    # print message
-    print('Soil is wet, valve is off.')
+        time.sleep(30)
+    else:
+        time.sleep(30)
