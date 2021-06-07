@@ -8,3 +8,5 @@ int_channel_output = 15
 int_sec_sleep_dry = 1
 # seconds to wait of soil is wet
 int_sec_sleep_wet = 10
+# logging filename
+str_filename = 'dict_log.txt'
